@@ -1,10 +1,10 @@
 import { IonContent, IonHeader, IonPage, IonSearchbar, IonTitle, IonToolbar, IonButton, IonIcon, IonButtons, IonRow, IonCol, IonImg, IonItem } from "@ionic/react"
 import { useEffect, useState } from "react"
-import { arrowBackOutline, arrowForwardOutline, listOutline, gridOutline } from "ionicons/icons"
+
 
 
 const Home: React.FC = () => {
-   const [view, setView] = useState(true)
+  
   const [search, setSearch] = useState("random")
   const [page, setPage] = useState(1)
 
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       .then((data) => setData(data))
   }, [search.page])
 
-  console.log(data)
+
 
   return (
     <IonPage>
@@ -35,21 +35,14 @@ const Home: React.FC = () => {
           <IonTitle>Image Gallery {": " + page + " / 10"} </IonTitle>
         </IonToolbar>
         <IonToolbar>
-          <IonRow>
-            <IonCol size="11">
+    
               <IonSearchbar showClearButton="focus" placeholder="Random" onIonChange={(ev) => handleChange(ev)}></IonSearchbar>
-            </IonCol>
-            <IonCol size="1">
-              <IonButton onClick={() => setView((prev) => !prev)}>
-                <IonIcon slot="icon-only" icon={view ? listOutline : gridOutline}></IonIcon>
-              </IonButton>
-            </IonCol>
-          </IonRow>
+           
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen>
-        {view ? (
+ 
           <IonRow>
             {data.results.map((item) => (
               <IonCol size="6">
@@ -59,16 +52,6 @@ const Home: React.FC = () => {
               </IonCol>
             ))}
           </IonRow>
-        ) : (
-          <IonList>
-            {data.results.map((item) => (
-              <IonItem routerLink={`/${item.id}`}>
-                <IonImg src={item.urls.small} />
-                <IonText>Title : {item.alt_description}</IonText>
-              </IonItem>
-            ))}
-          </IonList>
-        )}
       </IonContent>
       <IonToolbar>
         <IonTitle>Navigation Buttons</IonTitle>

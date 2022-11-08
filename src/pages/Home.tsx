@@ -3,7 +3,10 @@ import { useEffect, useState } from "react"
 import { arrowBackOutline, arrowForwardOutline, listOutline, gridOutline } from "ionicons/icons"
 
 
+
+
 const Home: React.FC = () => {
+  
   const [search, setSearch] = useState("random")
   const [view, setView] = useState(true)
   const [page, setPage] = useState(1)
@@ -26,7 +29,7 @@ const Home: React.FC = () => {
       .then((data) => setData(data))
   }, [search.page])
 
-  console.log(data)
+
 
   return (
     <IonPage>
@@ -34,6 +37,7 @@ const Home: React.FC = () => {
         <IonToolbar>
           <IonTitle>Image Gallery {": " + page + " / 10"} </IonTitle>
         </IonToolbar>
+
        <IonToolbar>
           <IonRow>
             <IonCol size="11">
@@ -45,10 +49,10 @@ const Home: React.FC = () => {
               </IonButton>
             </IonCol>
           </IonRow>
-        </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen>
+
         {view ? (
           <IonRow>
             {data.results.map((item) => (

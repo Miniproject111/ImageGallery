@@ -38,7 +38,9 @@ const Home: React.FC = () => {
         <IonRow>
           {data.results.map((item) => (
             <IonCol size="6">
-              <IonImg src={item.urls.small} />
+              <IonItem routerLink={`/${item.id}`}>
+                <IonImg src={item.urls.small} />
+              </IonItem>
             </IonCol>
           ))}
         </IonRow>

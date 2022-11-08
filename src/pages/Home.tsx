@@ -1,7 +1,10 @@
 import { IonContent, IonHeader, IonPage, IonSearchbar, IonTitle, IonToolbar, IonButton, IonIcon, IonButtons, IonRow, IonCol, IonImg, IonItem } from "@ionic/react"
 import { useEffect, useState } from "react"
+import { arrowBackOutline, arrowForwardOutline, listOutline, gridOutline } from "ionicons/icons"
+
 
 const Home: React.FC = () => {
+   const [view, setView] = useState(true)
   const [search, setSearch] = useState("random")
   const [page, setPage] = useState(1)
 
@@ -32,20 +35,40 @@ const Home: React.FC = () => {
           <IonTitle>Image Gallery {": " + page + " / 10"} </IonTitle>
         </IonToolbar>
         <IonToolbar>
-          <IonSearchbar showClearButton="focus" placeholder="Random" onIonChange={(ev) => handleChange(ev)}></IonSearchbar>
+          <IonRow>
+            <IonCol size="11">
+              <IonSearchbar showClearButton="focus" placeholder="Random" onIonChange={(ev) => handleChange(ev)}></IonSearchbar>
+            </IonCol>
+            <IonCol size="1">
+              <IonButton onClick={() => setView((prev) => !prev)}>
+                <IonIcon slot="icon-only" icon={view ? listOutline : gridOutline}></IonIcon>
+              </IonButton>
+            </IonCol>
+          </IonRow>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen>
-        <IonRow>
-          {data.results.map((item) => (
-            <IonCol size="6">
+        {view ? (
+          <IonRow>
+            {data.results.map((item) => (
+              <IonCol size="6">
+                <IonItem routerLink={`/${item.id}`}>
+                  <IonImg src={item.urls.small} />
+                </IonItem>
+              </IonCol>
+            ))}
+          </IonRow>
+        ) : (
+          <IonList>
+            {data.results.map((item) => (
               <IonItem routerLink={`/${item.id}`}>
                 <IonImg src={item.urls.small} />
+                <IonText>Title : {item.alt_description}</IonText>
               </IonItem>
-            </IonCol>
-          ))}
-        </IonRow>
+            ))}
+          </IonList>
+        )}
       </IonContent>
       <IonToolbar>
         <IonTitle>Navigation Buttons</IonTitle>

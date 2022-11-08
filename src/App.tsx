@@ -2,7 +2,7 @@ import { Route } from "react-router-dom"
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react"
 import { IonReactRouter } from "@ionic/react-router"
 import Home from "./pages/Home"
-// import { useState } from "react"
+import Image from "./pages/Image"
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css"
 
@@ -25,12 +25,12 @@ import "./theme/variables.css"
 setupIonicReact()
 
 const App: React.FC = () => {
-  // const [user, setUser] = useState(false)
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route exact path="/" component={Home} />
+          <Route exact path="/:imageId" component={Image} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
